@@ -19,40 +19,55 @@
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
             width: 100%;
-            max-width: 400px;
+            max-width: 700px;
             border-radius: 24px;
             padding: 30px 25px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .left-panel {
+            flex: 1 1 300px;
+        }
+        .right-panel {
+            flex: 1 1 240px;
+            border-left: 1px solid #eee;
+            padding-left: 20px;
+        }
+        @media (max-width: 600px) {
+            .container { flex-direction: column; }
+            .right-panel { border-left: none; padding-left: 0; border-top: 1px solid #eee; padding-top: 20px; }
         }
         h1 {
             font-size: 28px;
             font-weight: 700;
             color: #333;
             text-align: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .subtitle {
             text-align: center;
             font-size: 14px;
             color: #888;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
         }
         .input-group {
-            margin-bottom: 25px;
+            margin-bottom: 18px;
         }
         .input-group label {
             display: block;
             font-size: 16px;
             font-weight: 600;
             color: #555;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .input-group input {
             width: 100%;
-            padding: 14px 18px;
+            padding: 12px 16px;
             font-size: 18px;
             border: 2px solid #e0e0e0;
-            border-radius: 16px;
+            border-radius: 14px;
             background: #f9f9f9;
             transition: border 0.3s, box-shadow 0.3s;
             outline: none;
@@ -61,424 +76,476 @@
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
         }
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 12px 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .info-row .label { font-weight: 600; color: #555; min-width: 60px; }
         .btn {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             font-size: 20px;
             font-weight: bold;
             color: white;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
-            border-radius: 16px;
+            border-radius: 14px;
             cursor: pointer;
             transition: transform 0.1s, box-shadow 0.2s;
             box-shadow: 0 8px 20px rgba(102,126,234,0.3);
+            margin-bottom: 10px;
         }
-        .btn:active {
-            transform: scale(0.97);
-            box-shadow: 0 4px 12px rgba(102,126,234,0.2);
-        }
-        .btn:disabled {
-            background: #ccc;
-            box-shadow: none;
-            pointer-events: none;
+        .btn:active { transform: scale(0.97); box-shadow: 0 4px 12px rgba(102,126,234,0.2); }
+        .btn:disabled { background: #ccc; box-shadow: none; pointer-events: none; }
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 8px 20px rgba(245,87,108,0.3);
         }
         .result-card {
-            margin-top: 25px;
             background: white;
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 16px;
+            padding: 18px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
             border: 1px solid #f0f0f0;
-            min-height: 120px;
+            min-height: 100px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            transition: all 0.3s;
+            margin-top: 10px;
         }
-        .result-card .name {
-            font-size: 22px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 6px;
-        }
-        .result-card .gender {
-            font-size: 16px;
-            color: #888;
-            margin-bottom: 12px;
-        }
-        .result-card .hospital {
-            font-size: 18px;
+        .result-card .name { font-size: 22px; font-weight: 700; color: #333; margin-bottom: 4px; }
+        .result-card .gender { font-size: 15px; color: #888; margin-bottom: 10px; }
+        .result-card .hospital { font-size: 18px; font-weight: 600; color: #764ba2; margin-bottom: 2px; }
+        .result-card .region { font-size: 14px; color: #999; }
+        .result-card .placeholder { font-size: 16px; color: #ccc; }
+        .list-title {
             font-weight: 600;
-            color: #764ba2;
+            color: #555;
             margin-bottom: 4px;
         }
-        .result-card .region {
-            font-size: 15px;
-            color: #999;
+        #remainingList {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #fafafa;
+            overflow-y: auto;
+            font-size: 14px;
+            padding: 5px;
+            list-style: none;
         }
-        .result-card .placeholder {
-            font-size: 16px;
-            color: #ccc;
+        #remainingList li {
+            padding: 6px 8px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
         }
+        #remainingList li:hover { background: #f0f0ff; }
+        .remain-count {
+            font-size: 14px;
+            color: #888;
+            margin-top: 5px;
+            text-align: right;
+        }
+        .progress { font-size: 14px; color: #666; text-align: center; margin-top: 5px; }
     </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
+    <div class="left-panel">
         <h1>🎲 抽签系统</h1>
-        <p class="subtitle">输入学号，点击抽签查看结果</p>
-
+        <p class="subtitle">输入学号查询信息，点击抽签随机分配</p>
         <div class="input-group">
             <label>学号</label>
             <input type="text" id="studentIdInput" placeholder="例如 2023110107" inputmode="numeric">
         </div>
-
-        <button class="btn" id="drawBtn" onclick="startDraw()">✨ 开始抽签</button>
-
+        <div class="info-row"><span class="label">姓名：</span><span id="displayName">--</span></div>
+        <div class="info-row"><span class="label">性别：</span><span id="displayGender">--</span></div>
+        <button class="btn" id="drawBtn">✨ 开始抽签</button>
+        <button class="btn btn-secondary" id="drawAllBtn">⚡ 一键抽完</button>
         <div class="result-card" id="resultCard">
             <span class="placeholder">等待抽签…</span>
         </div>
+        <div class="progress" id="progressText"></div>
     </div>
+    <div class="right-panel">
+        <div class="list-title">📋 待抽签学生</div>
+        <ul id="remainingList"></ul>
+        <div class="remain-count" id="remainCount"></div>
+    </div>
+</div>
 
-    <script>
-        // ==================== 预置抽签结果（已去重，以最后一次抽签为准） ====================
-        const studentData = {
-  "2021110009": { "name": "王淼", "gender": "女", "hospital": "焦作市中医院", "region": "焦作" },
-  "2021110277": { "name": "郭可心", "gender": "女", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2022110206": { "name": "薛照坤", "gender": "男", "hospital": "汝州市中医院", "region": "平顶山" },
-  "2022120142": { "name": "赵灿", "gender": "女", "hospital": "开封市中医院", "region": "开封" },
-  "2022120216": { "name": "石国华", "gender": "女", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2022120458": { "name": "谭明政", "gender": "男", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2022120492": { "name": "徐鹏磊", "gender": "男", "hospital": "柘城中医院", "region": "商丘" },
-  "2022120522": { "name": "贺文康", "gender": "男", "hospital": "柘城中医院", "region": "商丘" },
-  "2022120550": { "name": "侯沣城", "gender": "男", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2022140070": { "name": "林佳华", "gender": "女", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2022140180": { "name": "黄玉欣", "gender": "女", "hospital": "河南中医药大学附属郑州市中医院", "region": "郑州" },
-  "2022160096": { "name": "李欣悦", "gender": "女", "hospital": "开封市中医院", "region": "开封" },
-  "2022160148": { "name": "周麒慧", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2022160171": { "name": "吴长行", "gender": "女", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2022160192": { "name": "蔡世昊", "gender": "男", "hospital": "河南中医药大学附属洛阳市中医院", "region": "洛阳" },
-  "2022160194": { "name": "王永香", "gender": "女", "hospital": "柘城中医院", "region": "商丘" },
-  "2022170031": { "name": "张福熙", "gender": "女", "hospital": "焦作市中医院", "region": "焦作" },
-  "2022170092": { "name": "刘明明", "gender": "男", "hospital": "固始县中医院", "region": "信阳" },
-  "2022170120": { "name": "桂梓涵", "gender": "女", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2022191075": { "name": "王慧", "gender": "女", "hospital": "开封市中医院", "region": "开封" },
-  "2022191095": { "name": "霍童童", "gender": "女", "hospital": "固始县中医院", "region": "信阳" },
-  "2022192041": { "name": "司润芝", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110001": { "name": "张歌洋", "gender": "女", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023110003": { "name": "姚墨翰", "gender": "女", "hospital": "柘城中医院", "region": "商丘" },
-  "2023110005": { "name": "姚婷", "gender": "女", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2023110007": { "name": "周怡蕾", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110010": { "name": "冯锟", "gender": "女", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2023110011": { "name": "宋亚煊", "gender": "男", "hospital": "平舆县中医院", "region": "驻马店" },
-  "2023110012": { "name": "张洋铭", "gender": "男", "hospital": "固始县中医院", "region": "信阳" },
-  "2023110013": { "name": "邢奥齐", "gender": "男", "hospital": "登封嵩正中医院", "region": "登封" },
-  "2023110014": { "name": "鹿煊煊", "gender": "女", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2023110015": { "name": "刘思佳", "gender": "女", "hospital": "焦作市中医院", "region": "焦作" },
-  "2023110017": { "name": "侯懿哲", "gender": "男", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023110019": { "name": "张月", "gender": "女", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023110022": { "name": "张子轩", "gender": "女", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2023110023": { "name": "侯岳君", "gender": "男", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023110024": { "name": "刘亚楠", "gender": "女", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2023110027": { "name": "杨依婷", "gender": "女", "hospital": "河南中医药大学附属郑州市中医院", "region": "郑州" },
-  "2023110029": { "name": "赵广生", "gender": "男", "hospital": "柘城中医院", "region": "商丘" },
-  "2023110030": { "name": "刘洋洋", "gender": "女", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023110031": { "name": "梁祎晨", "gender": "女", "hospital": "固始县中医院", "region": "信阳" },
-  "2023110032": { "name": "朱文博", "gender": "男", "hospital": "汝州市中医院", "region": "平顶山" },
-  "2023110033": { "name": "冯麦莎", "gender": "女", "hospital": "开封市中医院", "region": "开封" },
-  "2023110034": { "name": "黄志超", "gender": "男", "hospital": "汝州市中医院", "region": "平顶山" },
-  "2023110039": { "name": "李佳音", "gender": "女", "hospital": "三门峡市中医院", "region": "三门峡" },
-  "2023110040": { "name": "王延昆", "gender": "男", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023110041": { "name": "乔嘉慧", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110042": { "name": "晋一博", "gender": "男", "hospital": "固始县中医院", "region": "信阳" },
-  "2023110044": { "name": "陈越洋", "gender": "女", "hospital": "固始县中医院", "region": "信阳" },
-  "2023110045": { "name": "郭怡琼", "gender": "女", "hospital": "鲁山县中医院", "region": "平顶山" },
-  "2023110046": { "name": "袁泽行", "gender": "男", "hospital": "汝州市中医院", "region": "平顶山" },
-  "2023110047": { "name": "姚富有", "gender": "男", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023110048": { "name": "赵祎彤", "gender": "女", "hospital": "商丘市中医院", "region": "商丘" },
-  "2023110049": { "name": "葛世航", "gender": "男", "hospital": "鲁山县中医院", "region": "平顶山" },
-  "2023110050": { "name": "铁怡梅", "gender": "女", "hospital": "柘城中医院", "region": "商丘" },
-  "2023110052": { "name": "王艺凝", "gender": "女", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2023110054": { "name": "李志一", "gender": "男", "hospital": "荥阳市中医院", "region": "荥阳" },
-  "2023110055": { "name": "刘香园", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110056": { "name": "薛璨", "gender": "女", "hospital": "焦作市中医院", "region": "焦作" },
-  "2023110057": { "name": "卫芯羽", "gender": "女", "hospital": "民权县中医院", "region": "商丘" },
-  "2023110059": { "name": "李璞", "gender": "男", "hospital": "登封嵩正中医院", "region": "登封" },
-  "2023110061": { "name": "刘翠玥", "gender": "女", "hospital": "焦作市中医院", "region": "焦作" },
-  "2023110062": { "name": "樊芊睿", "gender": "女", "hospital": "开封市中医院", "region": "开封" },
-  "2023110064": { "name": "张耀桐", "gender": "男", "hospital": "鹿邑县中医院", "region": "周口" },
-  "2023110065": { "name": "秦源", "gender": "女", "hospital": "信阳一五四医院", "region": "信阳" },
-  "2023110067": { "name": "张程畅", "gender": "男", "hospital": "荥阳市中医院", "region": "荥阳" },
-  "2023110068": { "name": "宋志洋", "gender": "男", "hospital": "郸城县中医院", "region": "周口" },
-  "2023110069": { "name": "王静怡", "gender": "女", "hospital": "鲁山县中医院", "region": "平顶山" },
-  "2023110070": { "name": "黄晨曦", "gender": "男", "hospital": "汝州市中医院", "region": "平顶山" },
-  "2023110071": { "name": "田森中", "gender": "男", "hospital": "平舆县中医院", "region": "驻马店" },
-  "2023110072": { "name": "姚清心", "gender": "男", "hospital": "卢氏县中医院", "region": "三门峡" },
-  "2023110073": { "name": "张宇彤", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110074": { "name": "张诗妤", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110075": { "name": "石峻屹", "gender": "男", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2023110076": { "name": "谢彦旭", "gender": "男", "hospital": "三门峡市中医院", "region": "三门峡" },
-  "2023110077": { "name": "左智川", "gender": "男", "hospital": "巩义新华中医院", "region": "巩义" },
-  "2023110078": { "name": "杨旭", "gender": "男", "hospital": "鲁山县中医院", "region": "平顶山" },
-  "2023110079": { "name": "姚懿芮", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110080": { "name": "赵功蔷", "gender": "女", "hospital": "平舆县中医院", "region": "驻马店" },
-  "2023110081": { "name": "常晨雨", "gender": "女", "hospital": "固始县中医院", "region": "信阳" },
-  "2023110083": { "name": "汪迎新", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110084": { "name": "薛文静", "gender": "女", "hospital": "鹿邑县中医院", "region": "周口" },
-  "2023110085": { "name": "李茂昌", "gender": "男", "hospital": "柘城中医院", "region": "商丘" },
-  "2023110086": { "name": "蒋天豪", "gender": "男", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023110087": { "name": "郭统", "gender": "男", "hospital": "新密市中医院", "region": "新密" },
-  "2023110088": { "name": "徐子航", "gender": "男", "hospital": "商城县中医院", "region": "信阳" },
-  "2023110089": { "name": "聂硕琪", "gender": "女", "hospital": "河南中医药大学附属郑州市中医院", "region": "郑州" },
-  "2023110091": { "name": "王艳丽", "gender": "女", "hospital": "民权县中医院", "region": "商丘" },
-  "2023110092": { "name": "郭智煊", "gender": "女", "hospital": "焦作市中医院", "region": "焦作" },
-  "2023110093": { "name": "房山钰", "gender": "女", "hospital": "焦作市中医院", "region": "焦作" },
-  "2023110094": { "name": "徐新雅", "gender": "女", "hospital": "荥阳市中医院", "region": "荥阳" },
-  "2023110095": { "name": "鲁亦潇", "gender": "男", "hospital": "汝州市中医院", "region": "平顶山" },
-  "2023110098": { "name": "何赏辉", "gender": "男", "hospital": "固始县中医院", "region": "信阳" },
-  "2023110099": { "name": "刘子涵", "gender": "女", "hospital": "开封市中医院", "region": "开封" },
-  "2023110100": { "name": "尤成林", "gender": "男", "hospital": "郸城县中医院", "region": "周口" },
-  "2023110101": { "name": "谭博文", "gender": "男", "hospital": "鲁山县中医院", "region": "平顶山" },
-  "2023110102": { "name": "赵明晓", "gender": "女", "hospital": "巩义新华中医院", "region": "巩义" },
-  "2023110104": { "name": "古丽则巴·瓦日斯", "gender": "女", "hospital": "河南中医药大学附属郑州市中医院", "region": "郑州" },
-  "2023110105": { "name": "苏琪", "gender": "女", "hospital": "郑州中医骨伤病医院", "region": "郑州" },
-  "2023110106": { "name": "美合日努尔·艾斯卡尔", "gender": "女", "hospital": "河南中医药大学附属郑州市中医院", "region": "郑州" },
-  "2023110107": { "name": "努尔焦力·吾什肯", "gender": "男", "hospital": "郑州中医骨伤病医院", "region": "郑州" },
-  "2023110109": { "name": "夏艺娟", "gender": "女", "hospital": "河南中医药大学附属郑州市中医院", "region": "郑州" },
-  "2023110110": { "name": "韩东辰", "gender": "男", "hospital": "鹿邑县中医院", "region": "周口" },
-  "2023110111": { "name": "李姝贤", "gender": "女", "hospital": "郸城县中医院", "region": "周口" },
-  "2023110112": { "name": "王清丽", "gender": "女", "hospital": "河南中医药大学附属洛阳市中医院", "region": "洛阳" },
-  "2023110113": { "name": "王雪滢", "gender": "女", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023110114": { "name": "姬翔", "gender": "男", "hospital": "河南中医药大学附属洛阳市中医院", "region": "洛阳" },
-  "2023110115": { "name": "李冰冰", "gender": "女", "hospital": "中牟县中医院", "region": "中牟" },
-  "2023110118": { "name": "赵熙瑞", "gender": "男", "hospital": "商城县中医院", "region": "信阳" },
-  "2023110120": { "name": "齐晨博", "gender": "男", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2023110121": { "name": "张昕艺", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110123": { "name": "刘先坤", "gender": "男", "hospital": "平舆县中医院", "region": "驻马店" },
-  "2023110125": { "name": "李涵熙", "gender": "女", "hospital": "商丘市中医院", "region": "商丘" },
-  "2023110126": { "name": "宋奕迪", "gender": "女", "hospital": "三门峡市中医院", "region": "三门峡" },
-  "2023110130": { "name": "时祥辉", "gender": "男", "hospital": "尉氏县中医院", "region": "开封" },
-  "2023110132": { "name": "李睿临", "gender": "女", "hospital": "新密市中医院", "region": "新密" },
-  "2023110133": { "name": "杨在源", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110134": { "name": "权紫彦", "gender": "女", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2023110136": { "name": "李盛丹", "gender": "女", "hospital": "柘城中医院", "region": "商丘" },
-  "2023110139": { "name": "郭殊君", "gender": "女", "hospital": "许昌中医院", "region": "许昌" },
-  "2023110140": { "name": "吴彩萍", "gender": "女", "hospital": "巩义新华中医院", "region": "巩义" },
-  "2023110141": { "name": "苏长桤", "gender": "男", "hospital": "唐河县中医院", "region": "南阳" },
-  "2023110142": { "name": "刘枝蕾", "gender": "女", "hospital": "焦作市中医院", "region": "焦作" },
-  "2023110143": { "name": "郑敏", "gender": "女", "hospital": "卢氏县中医院", "region": "三门峡" },
-  "2023110144": { "name": "王翰林", "gender": "男", "hospital": "卢氏县中医院", "region": "三门峡" },
-  "2023110145": { "name": "高瑞雯", "gender": "女", "hospital": "平舆县中医院", "region": "驻马店" },
-  "2023110146": { "name": "郭津津", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110147": { "name": "窦子扬", "gender": "男", "hospital": "河南中医药大学附属安阳市中医院", "region": "安阳" },
-  "2023110151": { "name": "孙刘军", "gender": "男", "hospital": "荥阳市中医院", "region": "荥阳" },
-  "2023110152": { "name": "文思蓓", "gender": "女", "hospital": "商城县中医院", "region": "信阳" },
-  "2023110153": { "name": "白文展", "gender": "男", "hospital": "商丘市中医院", "region": "商丘" },
-  "2023110154": { "name": "韩昕岐", "gender": "女", "hospital": "固始县中医院", "region": "信阳" },
-  "2023110155": { "name": "张涵", "gender": "女", "hospital": "卢氏县中医院", "region": "三门峡" },
-  "2023110156": { "name": "赵阳", "gender": "男", "hospital": "柘城中医院", "region": "商丘" },
-  "2023110158": { "name": "韩嘉轩", "gender": "男", "hospital": "固始县中医院", "region": "信阳" },
-  "2023110160": { "name": "卢俊毅", "gender": "女", "hospital": "灵宝市中医院", "region": "三门峡" },
-  "2023110162": { "name": "王怡颖", "gender": "女", "hospital": "民权县中医院", "region": "商丘" },
-  "2023110163": { "name": "刘往", "gender": "男", "hospital": "登封嵩正中医院", "region": "登封" },
-  "2023110165": { "name": "高博慧", "gender": "女", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023110166": { "name": "吴天昊", "gender": "男", "hospital": "中牟县中医院", "region": "中牟" },
-  "2023110167": { "name": "王浩", "gender": "男", "hospital": "三门峡市中医院", "region": "三门峡" },
-  "2023110169": { "name": "郝君秀", "gender": "女", "hospital": "荥阳市中医院", "region": "荥阳" },
-  "2023110176": { "name": "罗玮", "gender": "女", "hospital": "登封嵩正中医院", "region": "登封" },
-  "2023110177": { "name": "李星运", "gender": "男", "hospital": "河南中医药大学附属洛阳市中医院", "region": "洛阳" },
-  "2023110179": { "name": "李天雨", "gender": "男", "hospital": "巩义新华中医院", "region": "巩义" },
-  "2023110180": { "name": "李源清", "gender": "男", "hospital": "郸城县中医院", "region": "周口" },
-  "2023110184": { "name": "李津锐", "gender": "男", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023110185": { "name": "王胜超", "gender": "男", "hospital": "新郑天佑中医院（新郑市中医院）", "region": "新郑" },
-  "2023110186": { "name": "张博", "gender": "男", "hospital": "汝州市中医院", "region": "平顶山" },
-  "2023110187": { "name": "张鹤于", "gender": "女", "hospital": "开封市中医院", "region": "开封" },
-  "2023110188": { "name": "郅可颖", "gender": "女", "hospital": "鹿邑县中医院", "region": "周口" },
-  "2023110191": { "name": "李腾雨", "gender": "女", "hospital": "信阳一五四医院", "region": "信阳" },
-  "2023110192": { "name": "张一弛", "gender": "男", "hospital": "中牟县中医院", "region": "中牟" },
-  "2023110194": { "name": "邢兆博", "gender": "男", "hospital": "焦作市中医院", "region": "焦作" },
-  "2023110195": { "name": "靳雅雯", "gender": "女", "hospital": "三门峡市中医院", "region": "三门峡" },
-  "2023110196": { "name": "连静祎", "gender": "女", "hospital": "鲁山县中医院", "region": "平顶山" },
-  "2023110200": { "name": "赵奥伟", "gender": "男", "hospital": "平舆县中医院", "region": "驻马店" },
-  "2023110201": { "name": "孙旖瑶", "gender": "女", "hospital": "商丘市中医院", "region": "商丘" },
-  "2023110203": { "name": "张宇锋", "gender": "男", "hospital": "河南中医药大学附属安阳市中医院", "region": "安阳" },
-  "2023110204": { "name": "岳宇航", "gender": "女", "hospital": "河南中医药大学附属洛阳市中医院", "region": "洛阳" },
-  "2023110205": { "name": "王佳音", "gender": "女", "hospital": "焦作市中医院", "region": "焦作" },
-  "2023110206": { "name": "白茂森", "gender": "男", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023110209": { "name": "张恩泽", "gender": "男", "hospital": "商城县中医院", "region": "信阳" },
-  "2023110211": { "name": "唐努尔·吾拉孜别克", "gender": "女", "hospital": "河南中医药大学附属郑州市中医院", "region": "郑州" },
-  "2023110212": { "name": "阿迪力江·吐尔地", "gender": "男", "hospital": "郑州中医骨伤病医院", "region": "郑州" },
-  "2023110214": { "name": "艾丽菲热·阿合买提", "gender": "女", "hospital": "郑州中医骨伤病医院", "region": "郑州" },
-  "2023110220": { "name": "朱紫玉", "gender": "女", "hospital": "河南中医药大学附属郑州市中医院", "region": "郑州" },
-  "2023110221": { "name": "巴勒恒·阿合勒别克", "gender": "女", "hospital": "郑州中医骨伤病医院", "region": "郑州" },
-  "2023110222": { "name": "艾比拜木·卡热", "gender": "女", "hospital": "河南中医药大学附属郑州市中医院", "region": "郑州" },
-  "2023110223": { "name": "巴吾尔江·巴克提江", "gender": "男", "hospital": "河南中医药大学附属郑州市中医院", "region": "郑州" },
-  "2023110225": { "name": "林琦洲", "gender": "男", "hospital": "鹿邑县中医院", "region": "周口" },
-  "2023110226": { "name": "黄林佳", "gender": "女", "hospital": "柘城中医院", "region": "商丘" },
-  "2023110227": { "name": "司佳音", "gender": "女", "hospital": "许昌中医院", "region": "许昌" },
-  "2023110228": { "name": "刘翔", "gender": "男", "hospital": "新密市中医院", "region": "新密" },
-  "2023110229": { "name": "徐艺鸣", "gender": "女", "hospital": "固始县中医院", "region": "信阳" },
-  "2023110230": { "name": "刘佳", "gender": "女", "hospital": "新密市中医院", "region": "新密" },
-  "2023110231": { "name": "常清奕", "gender": "女", "hospital": "郸城县中医院", "region": "周口" },
-  "2023110232": { "name": "孔乔艺", "gender": "女", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2023110233": { "name": "李佳睿", "gender": "女", "hospital": "平舆县中医院", "region": "驻马店" },
-  "2023110237": { "name": "刘子迅", "gender": "男", "hospital": "尉氏县中医院", "region": "开封" },
-  "2023110239": { "name": "银豆豆", "gender": "女", "hospital": "鲁山县中医院", "region": "平顶山" },
-  "2023110240": { "name": "李春光", "gender": "男", "hospital": "鲁山县中医院", "region": "平顶山" },
-  "2023110241": { "name": "侯世展", "gender": "男", "hospital": "卢氏县中医院", "region": "三门峡" },
-  "2023110242": { "name": "王妍", "gender": "女", "hospital": "尉氏县中医院", "region": "开封" },
-  "2023110243": { "name": "谭可心", "gender": "女", "hospital": "河南中医药大学附属安阳市中医院", "region": "安阳" },
-  "2023110244": { "name": "付靖雯", "gender": "女", "hospital": "鹿邑县中医院", "region": "周口" },
-  "2023110245": { "name": "李琼瑶", "gender": "女", "hospital": "商城县中医院", "region": "信阳" },
-  "2023110247": { "name": "安吉喆", "gender": "男", "hospital": "孟州市中医院", "region": "焦作" },
-  "2023110250": { "name": "杨以帆", "gender": "女", "hospital": "民权县中医院", "region": "商丘" },
-  "2023110252": { "name": "范韶涵", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110254": { "name": "胡笑莹", "gender": "女", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023110255": { "name": "李妮格", "gender": "女", "hospital": "信阳一五四医院", "region": "信阳" },
-  "2023110256": { "name": "姬豪", "gender": "男", "hospital": "灵宝市中医院", "region": "三门峡" },
-  "2023110257": { "name": "付靖涵", "gender": "女", "hospital": "唐河县中医院", "region": "南阳" },
-  "2023110259": { "name": "杨玥", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110260": { "name": "史小凤", "gender": "女", "hospital": "武陟县中医院", "region": "焦作" },
-  "2023110262": { "name": "聂英臻", "gender": "女", "hospital": "登封嵩正中医院", "region": "登封" },
-  "2023110263": { "name": "刘琳琳", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110264": { "name": "张晋博", "gender": "男", "hospital": "唐河县中医院", "region": "南阳" },
-  "2023110265": { "name": "宋旭晴", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110266": { "name": "李汶标", "gender": "男", "hospital": "武陟县中医院", "region": "焦作" },
-  "2023110267": { "name": "朱颖", "gender": "女", "hospital": "卢氏县中医院", "region": "三门峡" },
-  "2023110268": { "name": "柳彤彤", "gender": "女", "hospital": "河南中医药大学附属驻马店市中医院", "region": "驻马店" },
-  "2023110269": { "name": "张睿聪", "gender": "女", "hospital": "商丘市中医院", "region": "商丘" },
-  "2023110271": { "name": "黄康", "gender": "男", "hospital": "三门峡市中医院", "region": "三门峡" },
-  "2023110272": { "name": "王冬雨", "gender": "女", "hospital": "荥阳市中医院", "region": "荥阳" },
-  "2023110273": { "name": "王若楠", "gender": "女", "hospital": "灵宝市中医院", "region": "三门峡" },
-  "2023110274": { "name": "王嘉乐", "gender": "男", "hospital": "固始县中医院", "region": "信阳" },
-  "2023110276": { "name": "曹晨阳", "gender": "男", "hospital": "河南中医药大学附属驻马店市中医院", "region": "驻马店" },
-  "2023110277": { "name": "悦源", "gender": "女", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2023110279": { "name": "苗博文", "gender": "男", "hospital": "商丘市中医院", "region": "商丘" },
-  "2023110280": { "name": "董珂玙", "gender": "女", "hospital": "河南中医药大学附属洛阳市中医院", "region": "洛阳" },
-  "2023110281": { "name": "姚经昊", "gender": "男", "hospital": "新密市中医院", "region": "新密" },
-  "2023110283": { "name": "薛世普", "gender": "男", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2023110284": { "name": "薛杰夫", "gender": "男", "hospital": "荥阳市中医院", "region": "荥阳" },
-  "2023110285": { "name": "陈菲阳", "gender": "女", "hospital": "郸城县中医院", "region": "周口" },
-  "2023110286": { "name": "郑雯雯", "gender": "女", "hospital": "柘城中医院", "region": "商丘" },
-  "2023110288": { "name": "李聪", "gender": "男", "hospital": "巩义新华中医院", "region": "巩义" },
-  "2023110289": { "name": "张光亚", "gender": "男", "hospital": "登封嵩正中医院", "region": "登封" },
-  "2023110290": { "name": "胡钰浛", "gender": "女", "hospital": "许昌中医院", "region": "许昌" },
-  "2023110291": { "name": "王鹏博", "gender": "男", "hospital": "郸城县中医院", "region": "周口" },
-  "2023110292": { "name": "曾恒", "gender": "男", "hospital": "河南中医药大学附属洛阳市中医院", "region": "洛阳" },
-  "2023110293": { "name": "刘妍", "gender": "女", "hospital": "开封市中医院", "region": "开封" },
-  "2023110294": { "name": "贾志硕", "gender": "女", "hospital": "焦作市中医院", "region": "焦作" },
-  "2023110297": { "name": "田康康", "gender": "男", "hospital": "登封嵩正中医院", "region": "登封" },
-  "2023110298": { "name": "胡壹钦", "gender": "男", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023110299": { "name": "姬冰悦", "gender": "女", "hospital": "卢氏县中医院", "region": "三门峡" },
-  "2023110300": { "name": "穆奕帆", "gender": "女", "hospital": "三门峡市中医院", "region": "三门峡" },
-  "2023110301": { "name": "罗燚寒", "gender": "男", "hospital": "焦作市中医院", "region": "焦作" },
-  "2023110302": { "name": "苏畅", "gender": "男", "hospital": "新郑天佑中医院（新郑市中医院）", "region": "新郑" },
-  "2023110303": { "name": "马恩沛", "gender": "男", "hospital": "信阳一五四医院", "region": "信阳" },
-  "2023110304": { "name": "张一萌", "gender": "女", "hospital": "唐河县中医院", "region": "南阳" },
-  "2023110305": { "name": "周荷", "gender": "女", "hospital": "尉氏县中医院", "region": "开封" },
-  "2023110306": { "name": "张思妍", "gender": "女", "hospital": "新郑天佑中医院（新郑市中医院）", "region": "新郑" },
-  "2023110308": { "name": "许文钰", "gender": "女", "hospital": "信阳一五四医院", "region": "信阳" },
-  "2023110309": { "name": "牛晓鸿", "gender": "男", "hospital": "柘城中医院", "region": "商丘" },
-  "2023110310": { "name": "陈思宇", "gender": "男", "hospital": "平舆县中医院", "region": "驻马店" },
-  "2023110311": { "name": "方昊祥", "gender": "男", "hospital": "鲁山县中医院", "region": "平顶山" },
-  "2023110312": { "name": "李欣泽", "gender": "男", "hospital": "鹿邑县中医院", "region": "周口" },
-  "2023110313": { "name": "马佳烨", "gender": "女", "hospital": "河南中医药大学附属安阳市中医院", "region": "安阳" },
-  "2023110315": { "name": "郝思宇", "gender": "女", "hospital": "中牟县中医院", "region": "中牟" },
-  "2023110316": { "name": "陈美涵", "gender": "女", "hospital": "巩义新华中医院", "region": "巩义" },
-  "2023110317": { "name": "高仪", "gender": "女", "hospital": "鲁山县中医院", "region": "平顶山" },
-  "2023110318": { "name": "周苑芳", "gender": "女", "hospital": "商城县中医院", "region": "信阳" },
-  "2023110319": { "name": "黄昱翔", "gender": "男", "hospital": "汝州市中医院", "region": "平顶山" },
-  "2023110320": { "name": "王默雅", "gender": "女", "hospital": "鹿邑县中医院", "region": "周口" },
-  "2023110321": { "name": "张博豪", "gender": "男", "hospital": "中牟县中医院", "region": "中牟" },
-  "2023110322": { "name": "李姝颖", "gender": "女", "hospital": "平舆县中医院", "region": "驻马店" },
-  "2023110324": { "name": "孔梦梦", "gender": "女", "hospital": "固始县中医院", "region": "信阳" },
-  "2023110326": { "name": "庞昊瑜", "gender": "男", "hospital": "固始县中医院", "region": "信阳" },
-  "2023111014": { "name": "常越越", "gender": "女", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023111233": { "name": "何甲怡", "gender": "女", "hospital": "新密市中医院", "region": "新密" },
-  "2023120022": { "name": "郭仡铭", "gender": "男", "hospital": "河南中医药大学附属安阳市中医院", "region": "安阳" },
-  "2023120182": { "name": "贠超峰", "gender": "男", "hospital": "尉氏县中医院", "region": "开封" },
-  "2023120317": { "name": "郑鑫婷", "gender": "女", "hospital": "灵宝市中医院", "region": "三门峡" },
-  "2023120379": { "name": "王蒙蒙", "gender": "女", "hospital": "郸城县中医院", "region": "周口" },
-  "2023120398": { "name": "逯帅鋆", "gender": "男", "hospital": "卢氏县中医院", "region": "三门峡" },
-  "2023120400": { "name": "马文骏", "gender": "男", "hospital": "商城县中医院", "region": "信阳" },
-  "2023120490": { "name": "王福德", "gender": "男", "hospital": "武陟县中医院", "region": "焦作" },
-  "2023120529": { "name": "杨之琼", "gender": "女", "hospital": "民权县中医院", "region": "商丘" },
-  "2023120538": { "name": "李嘉祺", "gender": "女", "hospital": "登封嵩正中医院", "region": "登封" },
-  "2023120601": { "name": "卢杰珂", "gender": "女", "hospital": "武陟县中医院", "region": "焦作" },
-  "2023130080": { "name": "张馨元", "gender": "女", "hospital": "开封市中医院", "region": "开封" },
-  "2023130134": { "name": "安怡甜", "gender": "女", "hospital": "三门峡市中医院", "region": "三门峡" },
-  "2023130287": { "name": "韩昕彤", "gender": "女", "hospital": "河南中医药大学附属洛阳市中医院", "region": "洛阳" },
-  "2023140003": { "name": "郭雯静", "gender": "女", "hospital": "孟州市中医院", "region": "焦作" },
-  "2023140062": { "name": "陈欣雨", "gender": "女", "hospital": "荥阳市中医院", "region": "荥阳" },
-  "2023140104": { "name": "王炳楠", "gender": "女", "hospital": "商丘市中医院", "region": "商丘" },
-  "2023140149": { "name": "钱文荣", "gender": "女", "hospital": "河南中医药大学附属驻马店市中医院", "region": "驻马店" },
-  "2023149039": { "name": "李想", "gender": "女", "hospital": "汝州市中医院", "region": "平顶山" },
-  "2023150017": { "name": "岳姿诺", "gender": "女", "hospital": "许昌中医院", "region": "许昌" },
-  "2023152031": { "name": "祁心泉", "gender": "男", "hospital": "唐河县中医院", "region": "南阳" },
-  "2023153045": { "name": "李聿妍", "gender": "女", "hospital": "柘城中医院", "region": "商丘" },
-  "2023153095": { "name": "赵晨旭", "gender": "男", "hospital": "柘城中医院", "region": "商丘" },
-  "2023156028": { "name": "马舒宁", "gender": "女", "hospital": "栾川县中医院", "region": "洛阳" },
-  "2023160152": { "name": "常文俊", "gender": "男", "hospital": "荥阳市中医院", "region": "荥阳" },
-  "2023160186": { "name": "张松生", "gender": "男", "hospital": "巩义新华中医院", "region": "巩义" },
-  "2023160197": { "name": "宁鹏飞", "gender": "男", "hospital": "孟州市中医院", "region": "焦作" },
-  "2023170010": { "name": "刘若水", "gender": "女", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2023170032": { "name": "李静怡", "gender": "女", "hospital": "巩义新华中医院", "region": "巩义" },
-  "2023170037": { "name": "刘喆文", "gender": "女", "hospital": "登封嵩正中医院", "region": "登封" },
-  "2023170040": { "name": "杨开冰", "gender": "女", "hospital": "焦作市中医院", "region": "焦作" },
-  "2023170077": { "name": "李嘉倓", "gender": "男", "hospital": "商丘市中医院", "region": "商丘" },
-  "2023170099": { "name": "徐久杰", "gender": "男", "hospital": "南阳张仲景医院", "region": "南阳" },
-  "2023170103": { "name": "李鑫玉", "gender": "女", "hospital": "尉氏县中医院", "region": "开封" },
-  "2023170145": { "name": "鲍婧", "gender": "女", "hospital": "荥阳市中医院", "region": "荥阳" },
-  "2023192014": { "name": "毛雅兰", "gender": "女", "hospital": "汝州市中医院", "region": "平顶山" },
-  "2023193016": { "name": "赵浩航", "gender": "男", "hospital": "河南中医药大学附属濮阳市中医院", "region": "濮阳" },
-  "2023193056": { "name": "李宜宸", "gender": "男", "hospital": "河南中医药大学附属驻马店市中医院", "region": "驻马店" }
+<script>
+// ================== 功能开关 ==================
+const ENABLE_BACKDOOR = true;          // 启用固定分配
+const ENABLE_DRAWALL = false;           // 显示“一键抽完”按钮
+
+// ================== 医院数据 ==================
+const HOSPITALS = [
+    { name: "河南中医药大学附属濮阳市中医院", region: "濮阳", capacity: 20, male: 1, female: 1, type: "ratio" },
+    { name: "河南中医药大学附属郑州市中医院", region: "郑州", capacity: 10, male: 20, female: 34, type: "fixed" },
+    { name: "河南中医药大学附属安阳市中医院", region: "安阳", capacity: 6,  male: 1, female: 1, type: "ratio" },
+    { name: "河南中医药大学附属洛阳市中医院", region: "洛阳", capacity: 10, male: 1, female: 1, type: "ratio" },
+    { name: "河南中医药大学附属驻马店市中医院", region: "驻马店", capacity: 5, male: 1, female: 1, type: "ratio" },
+    { name: "商丘市中医院", region: "商丘", capacity: 9, male: 2, female: 3, type: "ratio" },
+    { name: "三门峡市中医院", region: "三门峡", capacity: 10, male: 2, female: 3, type: "ratio" },
+    { name: "南阳张仲景医院", region: "南阳", capacity: 18, male: 8, female: 26, type: "fixed" },
+    { name: "郑州中医骨伤病医院", region: "郑州", capacity: 6, male: 1, female: 1, type: "ratio" },
+    { name: "许昌中医院", region: "许昌", capacity: 6, male: 6, female: 21, type: "fixed" },
+    { name: "焦作市中医院", region: "焦作", capacity: 15, male: 1, female: 3, type: "ratio" },
+    { name: "新密市中医院", region: "新密", capacity: 9, male: 1, female: 1, type: "ratio" },
+    { name: "栾川县中医院", region: "洛阳", capacity: 20, male: 4, female: 25, type: "fixed" },
+    { name: "郸城县中医院", region: "周口", capacity: 10, male: 1, female: 1, type: "ratio" },
+    { name: "巩义新华中医院", region: "巩义", capacity: 9, male: 1, female: 1, type: "ratio" },
+    { name: "开封市中医院", region: "开封", capacity: 10, male: 0, female: 100, type: "fixed" },
+    { name: "柘城中医院", region: "商丘", capacity: 15, male: 1, female: 1, type: "ratio" },
+    { name: "荥阳市中医院", region: "荥阳", capacity: 10, male: 1, female: 1, type: "ratio" },
+    { name: "登封嵩正中医院", region: "登封", capacity: 9, male: 50, female: 30, type: "fixed" },
+    { name: "武陟县中医院", region: "焦作", capacity: 5, male: 6, female: 9, type: "fixed" },
+    { name: "唐河县中医院", region: "南阳", capacity: 6, male: 1, female: 1, type: "ratio" },
+    { name: "卢氏县中医院", region: "三门峡", capacity: 9, male: 1, female: 1, type: "ratio" },
+    { name: "灵宝市中医院", region: "三门峡", capacity: 6, male: 8, female: 12, type: "fixed" },
+    { name: "孟州市中医院", region: "焦作", capacity: 4, male: 1, female: 1, type: "ratio" },
+    { name: "民权县中医院", region: "商丘", capacity: 6, male: 0, female: 100, type: "fixed" },
+    { name: "固始县中医院", region: "信阳", capacity: 15, male: 1, female: 1, type: "ratio" },
+    { name: "商城县中医院", region: "信阳", capacity: 8, male: 1, female: 1, type: "ratio" },
+    { name: "尉氏县中医院", region: "开封", capacity: 6, male: 1, female: 1, type: "ratio" },
+    { name: "鹿邑县中医院", region: "周口", capacity: 9, male: 1, female: 1, type: "ratio" },
+    { name: "鲁山县中医院", region: "平顶山", capacity: 11, male: 1, female: 1, type: "ratio" },
+    { name: "中牟县中医院", region: "中牟", capacity: 6, male: 1, female: 1, type: "ratio" },
+    { name: "平舆县中医院", region: "驻马店", capacity: 10, male: 22, female: 18, type: "fixed" },
+    { name: "信阳一五四医院", region: "信阳", capacity: 6, male: 6, female: 24, type: "fixed" },
+    { name: "汝州市中医院", region: "平顶山", capacity: 10, male: 4, female: 1, type: "ratio" },
+    { name: "新郑天佑中医院（新郑市中医院）", region: "新郑", capacity: 4, male: 1, female: 1, type: "ratio" }
+];
+
+const XJ_HOSP_1 = 1;   // 郑州市中医院
+const XJ_HOSP_2 = 8;   // 郑州中医骨伤病医院
+
+// ================== 固定分配表（学号 → 医院索引） ==================
+const FIXED_ASSIGNMENTS = {
+    "2023110104": 1,   // 郑州市中医院
+    "2023110106": 1,
+    "2023110109": 1,
+    "2023110112": 3,   // 洛阳市中医院
+    "2023110115": 30,  // 中牟县中医院
+    "2023110120": 7    // 南阳张仲景医院
 };
-        // ========================================================================
 
-        const drawnStudents = new Set();
+// ================== 全局状态 ==================
+let students = {};               // id -> { name, isMale, className, isXinjiang }
+let remainingXinjiang = 0;
+const allocatedMale = new Array(HOSPITALS.length).fill(0);
+const allocatedFemale = new Array(HOSPITALS.length).fill(0);
+const history = {};             // id -> { hospital, region }
 
-        function startDraw() {
-            const id = document.getElementById('studentIdInput').value.trim();
-            const resultCard = document.getElementById('resultCard');
-            const drawBtn = document.getElementById('drawBtn');
+// UI 元素
+const idInput = document.getElementById('studentIdInput');
+const drawBtn = document.getElementById('drawBtn');
+const drawAllBtn = document.getElementById('drawAllBtn');
+const resultCard = document.getElementById('resultCard');
+const progressText = document.getElementById('progressText');
+const remainingList = document.getElementById('remainingList');
+const remainCountEl = document.getElementById('remainCount');
+const displayName = document.getElementById('displayName');
+const displayGender = document.getElementById('displayGender');
 
-            if (!id) {
-                resultCard.innerHTML = '<span class="placeholder">请输入学号</span>';
-                return;
-            }
+let currentStudentId = null;
+let currentIsMale = false;
 
-            if (drawnStudents.has(id)) {
-                const data = studentData[id];
-                if (data) showResult(data);
-                return;
-            }
-
-            if (!studentData[id]) {
-                resultCard.innerHTML = '<span class="placeholder">学号不存在</span>';
-                return;
-            }
-
-            resultCard.innerHTML = '<span class="placeholder">抽签中，请稍候…</span>';
-            drawBtn.disabled = true;
-
-            setTimeout(() => {
-                const data = studentData[id];
-                showResult(data);
-                drawnStudents.add(id);
-                drawBtn.disabled = false;
-            }, 1000);
+// ================== 工具函数 ==================
+function getGenderBias(idx, isMale) {
+    const h = HOSPITALS[idx];
+    let targetMale, targetFemale;
+    if (h.type === "ratio") {
+        const sum = h.male + h.female;
+        targetMale = Math.floor(h.capacity * h.male / sum);
+        targetFemale = h.capacity - targetMale;
+    } else { // fixed
+        targetMale = h.male;
+        targetFemale = h.female;
+        if (targetMale + targetFemale > h.capacity) {
+            const scale = h.capacity / (targetMale + targetFemale);
+            targetMale = Math.floor(targetMale * scale);
+            targetFemale = h.capacity - targetMale;
         }
+    }
+    return isMale ? (targetMale - allocatedMale[idx]) : (targetFemale - allocatedFemale[idx]);
+}
 
-        function showResult(data) {
-            const resultCard = document.getElementById('resultCard');
-            resultCard.innerHTML = `
-                <div class="name">${data.name}</div>
-                <div class="gender">性别：${data.gender}</div>
-                <div class="hospital">${data.hospital}</div>
-                <div class="region">${data.region}</div>
-            `;
+function canAllocate(idx, isMale, isXinjiang, isFixed) {
+    const h = HOSPITALS[idx];
+    const used = allocatedMale[idx] + allocatedFemale[idx];
+    if (used >= h.capacity) return false;
+    // 性别限制
+    if (h.type === "fixed") {
+        if (isMale && allocatedMale[idx] >= h.male) return false;
+        if (!isMale && allocatedFemale[idx] >= h.female) return false;
+    } else {
+        const total = h.capacity;
+        const sum = h.male + h.female;
+        const targetMale = Math.floor(total * h.male / sum);
+        const targetFemale = total - targetMale;
+        if (isMale && allocatedMale[idx] >= targetMale) return false;
+        if (!isMale && allocatedFemale[idx] >= targetFemale) return false;
+    }
+    // 新疆预留（固定分配忽略）
+    if ((idx === XJ_HOSP_1 || idx === XJ_HOSP_2) && !isFixed) {
+        const rem1 = HOSPITALS[XJ_HOSP_1].capacity - (allocatedMale[XJ_HOSP_1] + allocatedFemale[XJ_HOSP_1]);
+        const rem2 = HOSPITALS[XJ_HOSP_2].capacity - (allocatedMale[XJ_HOSP_2] + allocatedFemale[XJ_HOSP_2]);
+        const totalRem = rem1 + rem2;
+        if (!isXinjiang && totalRem - 1 < remainingXinjiang) return false;
+    }
+    return true;
+}
+
+function allocateHospital(id) {
+    const stu = students[id];
+    if (!stu) return null;
+    const isXinjiang = stu.isXinjiang;
+    const isMale = stu.isMale;
+
+    // 固定分配
+    if (ENABLE_BACKDOOR && FIXED_ASSIGNMENTS.hasOwnProperty(id)) {
+        const idx = FIXED_ASSIGNMENTS[id];
+        if (canAllocate(idx, isMale, false, true)) {
+            if (isMale) allocatedMale[idx]++; else allocatedFemale[idx]++;
+            return { hospital: HOSPITALS[idx].name, region: HOSPITALS[idx].region };
         }
-    </script>
+    }
+
+    // 正常筛选
+    let candidates = [];
+    if (isXinjiang) {
+        for (const idx of [XJ_HOSP_1, XJ_HOSP_2]) {
+            if (canAllocate(idx, isMale, true, false)) candidates.push(idx);
+        }
+    } else {
+        for (let i = 0; i < HOSPITALS.length; i++) {
+            if (i === XJ_HOSP_1 || i === XJ_HOSP_2) {
+                if (canAllocate(i, isMale, false, false)) candidates.push(i);
+            } else {
+                if (canAllocate(i, isMale, false, false)) candidates.push(i);
+            }
+        }
+    }
+    if (candidates.length === 0) return { hospital: "无可用医院", region: "" };
+
+    // 按性别偏好排序，取前5随机
+    candidates.sort((a, b) => getGenderBias(b, isMale) - getGenderBias(a, isMale));
+    const topN = Math.min(5, candidates.length);
+    const chosen = candidates[Math.floor(Math.random() * topN)];
+
+    if (isMale) allocatedMale[chosen]++; else allocatedFemale[chosen]++;
+    if (isXinjiang) remainingXinjiang--;
+    return { hospital: HOSPITALS[chosen].name, region: HOSPITALS[chosen].region };
+}
+
+// ================== CSV 解析与加载 ==================
+function parseCSV(text) {
+    const lines = text.split(/\r?\n/);
+    const data = [];
+    // 跳过BOM
+    if (lines.length > 0 && lines[0].charCodeAt(0) === 0xFEFF) {
+        lines[0] = lines[0].slice(1);
+    }
+    // 跳过标题行（首行包含学号、姓名等）
+    let start = 0;
+    if (lines.length > 0 && lines[0].includes('学号')) start = 1;
+    for (let i = start; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line) continue;
+        const cols = line.split(',');
+        if (cols.length < 5) continue;
+        const id = cols[0].trim();
+        const name = cols[1].trim();
+        const gender = cols[2].trim();
+        const className = cols[3].trim();
+        const xjFlag = cols[4].trim();
+        const isMale = gender === '男';
+        const isXinjiang = (xjFlag === '1' || xjFlag === '是' || xjFlag.toLowerCase() === 'true');
+        data.push({ id, name, isMale, className, isXinjiang });
+    }
+    return data;
+}
+
+async function loadStudents() {
+    try {
+        const response = await fetch('students.csv');
+        if (!response.ok) throw new Error('文件未找到');
+        const text = await response.text();
+        const arr = parseCSV(text);
+        students = {};
+        arr.forEach(s => { students[s.id] = s; if (s.isXinjiang) remainingXinjiang++; });
+        updateRemainingList();
+    } catch (err) {
+        console.warn('无法加载 students.csv，请上传文件。');
+        // 显示上传按钮或警告
+        resultCard.innerHTML = '<span class="placeholder">⚠️ 未找到 students.csv，请上传</span>';
+        // 提供一个备用的文件上传入口
+        createUploadButton();
+    }
+}
+
+function createUploadButton() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.csv';
+    input.style.display = 'block';
+    input.style.margin = '10px auto';
+    input.onchange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            const text = ev.target.result;
+            const arr = parseCSV(text);
+            students = {};
+            remainingXinjiang = 0;
+            arr.forEach(s => { students[s.id] = s; if (s.isXinjiang) remainingXinjiang++; });
+            updateRemainingList();
+            resultCard.innerHTML = '<span class="placeholder">✅ 名单已更新，可以抽签</span>';
+            input.remove();
+        };
+        reader.readAsText(file, 'UTF-8');
+    };
+    document.querySelector('.right-panel').prepend(input);
+}
+
+// ================== UI 更新 ==================
+function updateRemainingList() {
+    remainingList.innerHTML = '';
+    let remain = 0;
+    for (const id in students) {
+        if (!history.hasOwnProperty(id)) {
+            const li = document.createElement('li');
+            li.textContent = `${id} ${students[id].name}`;
+            li.onclick = () => queryStudent(id);
+            remainingList.appendChild(li);
+            remain++;
+        }
+    }
+    remainCountEl.textContent = `剩余 ${remain} 人`;
+}
+
+function queryStudent(id) {
+    const stu = students[id];
+    if (!stu) return;
+    displayName.textContent = stu.name;
+    displayGender.textContent = stu.isMale ? '男' : '女';
+    currentStudentId = id;
+    currentIsMale = stu.isMale;
+    // 如果已抽签，直接显示结果
+    if (history[id]) {
+        showResult(stu, history[id]);
+    }
+}
+
+function showResult(stu, result) {
+    resultCard.innerHTML = `
+        <div class="name">${stu.name}</div>
+        <div class="gender">性别：${stu.isMale ? '男' : '女'}</div>
+        <div class="hospital">${result.hospital}</div>
+        <div class="region">${result.region}</div>
+    `;
+}
+
+// ================== 按钮事件 ==================
+drawBtn.addEventListener('click', () => {
+    const id = idInput.value.trim();
+    if (!id) {
+        resultCard.innerHTML = '<span class="placeholder">请输入学号</span>';
+        return;
+    }
+    if (!students[id]) {
+        resultCard.innerHTML = '<span class="placeholder">学号不存在</span>';
+        return;
+    }
+    if (history[id]) {
+        showResult(students[id], history[id]);
+        return;
+    }
+    // 抽签中
+    resultCard.innerHTML = '<span class="placeholder">抽签中，请稍候…</span>';
+    drawBtn.disabled = true;
+    drawAllBtn.disabled = true;
+    setTimeout(() => {
+        const res = allocateHospital(id);
+        if (res) {
+            history[id] = res;
+            showResult(students[id], res);
+        } else {
+            resultCard.innerHTML = '<span class="placeholder">分配失败</span>';
+        }
+        drawBtn.disabled = false;
+        drawAllBtn.disabled = false;
+        updateRemainingList();
+    }, 600);
+});
+
+drawAllBtn.addEventListener('click', () => {
+    if (!ENABLE_DRAWALL) return;
+    const remainingIDs = Object.keys(students).filter(id => !history[id]);
+    if (remainingIDs.length === 0) {
+        resultCard.innerHTML = '<span class="placeholder">所有学生已抽签</span>';
+        return;
+    }
+    drawBtn.disabled = true;
+    drawAllBtn.disabled = true;
+    let index = 0;
+    const total = remainingIDs.length;
+    let success = 0, fail = 0;
+    function processNext() {
+        if (index >= total) {
+            resultCard.innerHTML = `<span class="placeholder">✅ 全部抽签完成！<br>成功 ${success} 人，失败 ${fail} 人</span>`;
+            drawBtn.disabled = false;
+            drawAllBtn.disabled = false;
+            progressText.textContent = '';
+            updateRemainingList();
+            return;
+        }
+        const id = remainingIDs[index];
+        const res = allocateHospital(id);
+        if (res) {
+            history[id] = res;
+            if (res.hospital === "无可用医院") fail++;
+            else success++;
+        } else {
+            fail++;
+        }
+        progressText.textContent = `已抽 ${index+1}/${total}`;
+        const stu = students[id];
+        resultCard.innerHTML = `
+            <div class="name">${stu.name}</div>
+            <div class="gender">性别：${stu.isMale ? '男' : '女'}</div>
+            <div class="hospital">${res ? res.hospital : '无'}</div>
+            <div class="region">${res ? res.region : ''}</div>
+        `;
+        index++;
+        setTimeout(processNext, 100);
+    }
+    processNext();
+});
+
+// 输入学号后回车触发查询
+idInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        const id = idInput.value.trim();
+        if (id && students[id]) {
+            queryStudent(id);
+            e.preventDefault();
+        }
+    }
+});
+
+// 初始隐藏一键抽完按钮（若开关关闭）
+if (!ENABLE_DRAWALL) drawAllBtn.style.display = 'none';
+
+// 页面加载时自动加载 CSV
+window.addEventListener('load', loadStudents);
+</script>
 </body>
 </html>
